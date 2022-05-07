@@ -29,7 +29,7 @@ final class GitHubClient extends Client
         $content = json_decode($res->getBody()->getContents(), true, JSON_THROW_ON_ERROR);
 
         Assert::notNull($content);
-        return isset($content[0]) ? $content[0]['published_at'] : '';
+        return isset($content[0]) ? $content[0]['published_at'] : 'null';
     }
 
     /**
