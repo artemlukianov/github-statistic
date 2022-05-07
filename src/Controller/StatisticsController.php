@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Factory\StatisticDTOFactory;
-use App\Form\RepoForm;
+use OpenApi\Annotations as OA;
 use App\Form\RepoItemsForm;
 use App\Helper\RepoHelper;
 use App\Service\GitHubResponseService;
@@ -14,6 +14,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use App\DTO\GitHubStatisticDTO;
+use Nelmio\ApiDocBundle\Annotation\Model;
 
 final class StatisticsController extends AbstractController
 {
@@ -26,7 +28,24 @@ final class StatisticsController extends AbstractController
     ){
     }
 
-    #[Route(path: "/api/statistics/compare", methods: ["GET"])]
+    /**
+     * @Route("/api/statistics/compare", methods={"GET"})
+     * @OA\Response(
+     *     response=200,
+     *     description="Comparing two repositories",
+     *     @OA\JsonContent(
+     *        type="array",
+     *        @OA\Items(ref=@Model(type=GitHubStatisticDTO::class))
+     *     )
+     * )
+     * @OA\Parameter(
+     *     name="items",
+     *     in="query",
+     *     description="Urls/names of repositories",
+     *     @OA\Schema(type="array", @OA\Items(type="string"))
+     * )
+     * @OA\Tag(name="compare")
+     */
     public function compare(Request $request): Response
     {
         $form = (new RepoItemsForm())->mapFromArray($request->get('items') ?? []);
