@@ -14,9 +14,9 @@ init `./bin/init.sh`
 
 http://localhost:8080/api/doc.json
 
-## Test curls
+## Test curl
 -----------------
-User info <br />
+Compare repos <br />
 `curl 'http://localhost:8080/api/statistics/compare?items[]=ng-book2/code&items[]=dgadiraju/code'` <br />
 Response:
 `"data": {
