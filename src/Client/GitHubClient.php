@@ -47,9 +47,6 @@ final class GitHubClient extends Client
             $page++;
             $current = count($content);
             $result += $current;
-            if ($page > 150) {
-                dd('test');
-            }
         } while ($current > 0);
 
         return $result;
