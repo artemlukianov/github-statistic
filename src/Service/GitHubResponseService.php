@@ -22,7 +22,7 @@ final class GitHubResponseService
             ->setWatchersCount($stats['watchers_count'])
             ->setStartsCount($stats['stargazers_count'])
             ->setLatestReleaseDate($this->client->getLatestReleaseDate($form->getName()))
-            ->setClosedPullRequests($this->client->getPullsCount($form->getName()))
-            ->setOpenPullRequests($this->client->getPullsCount($form->getName(), 'closed'));
+            ->setClosedPullRequests($this->client->getPullsCount($form->getName(), 'closed'))
+            ->setOpenPullRequests($this->client->getPullsCount($form->getName()));
     }
 }
